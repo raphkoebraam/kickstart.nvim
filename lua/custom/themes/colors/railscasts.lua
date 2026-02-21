@@ -314,6 +314,10 @@ hi("@lsp.type.class.swift",                    { fg = c.attribute, bold = true }
 hi("@lsp.type.macro.swift",                    { fg = c.type_sys,  bold = true })
 hi("@lsp.type.modifier.swift",                 { fg = c.type_sys,  bold = true })
 hi("@lsp.type.identifier.swift",               {})
+
+-- Swift syntax layer overrides
+hi("swiftVarName",                             { fg = c.property })
+hi("swiftImportModule",                        { fg = c.fg, bold = true })
 hi("@lsp.mod.defaultLibrary.swift",            { link = "@lsp" })
 hi("@lsp.typemod.class.defaultLibrary.swift",  { fg = c.type_sys,  bold = true })
 hi("@lsp.typemod.macro.defaultLibrary.swift",  { fg = c.type_sys,  bold = true })

@@ -41,8 +41,8 @@ local c = {
   type          = "#569e67",  -- green – user types / classes
   type_sys      = "#da4938",  -- red – system types / built-in types
   variable      = "#b2b0eb",  -- lavender – variables
-  property      = "#7ba2c4",  -- lighter steel blue – properties
-  enum_member   = "#6db37d",  -- lighter green – enum members (distinct from type green)
+  property      = "#89b5d4",  -- lighter steel blue – properties
+  enum_member   = "#c75a4a",  -- softer red – enum cases (distinct from system type red)
   macro         = "#f6f492",  -- yellow – macros, URLs
   url           = "#f6f492",
   mark          = "#91a1b1",  -- blue-grey – MARK/TODO
@@ -295,8 +295,14 @@ hi("@lsp.type.namespace",       { fg = c.type })
 hi("@lsp.type.enumMember",      { fg = c.enum_member })
 hi("@lsp.type.keyword",         { fg = c.keyword })
 hi("@lsp.type.comment",         { fg = c.comment,  italic = true })
-hi("@lsp.mod.declaration",      { bold = true })
+hi("@lsp.mod.declaration",      {})
 hi("@lsp.mod.defaultLibrary",   { fg = c.type_sys })
+-- Bold specifically for type-name declarations
+hi("@lsp.typemod.class.declaration",     { fg = c.type, bold = true })
+hi("@lsp.typemod.struct.declaration",    { fg = c.type, bold = true })
+hi("@lsp.typemod.enum.declaration",      { fg = c.type, bold = true })
+hi("@lsp.typemod.interface.declaration", { fg = c.type, bold = true })
+hi("@lsp.typemod.typeAlias.declaration", { fg = c.type, bold = true })
 hi("@lsp.typemod.class.defaultLibrary",    { fg = c.type_sys, bold = true })
 hi("@lsp.typemod.struct.defaultLibrary",   { fg = c.type_sys, bold = true })
 hi("@lsp.typemod.enum.defaultLibrary",     { fg = c.type_sys, bold = true })
@@ -305,11 +311,12 @@ hi("@lsp.typemod.variable.defaultLibrary", { fg = c.variable })
 
 -- Swift-specific LSP overrides (SourceKit-LSP) ==========================
 hi("@lsp.type.class.swift",                    { fg = c.attribute, bold = true })
-hi("@lsp.type.macro.swift",                    { fg = c.attribute, bold = true })
-hi("@lsp.type.modifier.swift",                 { fg = c.attribute })
+hi("@lsp.type.macro.swift",                    { fg = c.type_sys,  bold = true })
+hi("@lsp.type.modifier.swift",                 { fg = c.type_sys,  bold = true })
+hi("@lsp.type.identifier.swift",               { fg = c.property })
 hi("@lsp.mod.defaultLibrary.swift",            { link = "@lsp" })
-hi("@lsp.typemod.class.defaultLibrary.swift",  { fg = c.attribute, bold = true })
-hi("@lsp.typemod.macro.defaultLibrary.swift",  { fg = c.attribute, bold = true })
+hi("@lsp.typemod.class.defaultLibrary.swift",  { fg = c.type_sys,  bold = true })
+hi("@lsp.typemod.macro.defaultLibrary.swift",  { fg = c.type_sys,  bold = true })
 
 -- Git signs =============================================================
 hi("GitSignsAdd",       { fg = c.string })

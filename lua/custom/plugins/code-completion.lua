@@ -8,6 +8,7 @@ return { -- Code completion
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-buffer",
       "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
     },
     config = function()
       local cmp     = require("cmp")
@@ -16,6 +17,7 @@ return { -- Code completion
       cmp.setup {
         sources = cmp.config.sources {
           { name = "nvim_lsp" },
+          { name = "luasnip" },
           { name = "path" },
           { name = "buffer" },
         },
@@ -25,13 +27,10 @@ return { -- Code completion
           end,
         },
         mapping = cmp.mapping.preset.insert({
-          -- Confirm selection
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
-
-          -- Super-tab forward: select completion → expand/jump snippet → fallback
+          -- Tab accepts the top item immediately (Xcode behavior)
           ["<Tab>"] = cmp.mapping(function(original)
             if cmp.visible() then
-              cmp.select_next_item()
+              cmp.confirm({ select = true })
             elseif luasnip.expand_or_jumpable() then
               luasnip.expand_or_jump()
             else
@@ -39,23 +38,25 @@ return { -- Code completion
             end
           end, { "i", "s" }),
 
-          -- Super-tab backward
-          ["<S-Tab>"] = cmp.mapping(function(original)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              original()
-            end
+          -- Enter also confirms when you've navigated to a specific item
+          ["<CR>"] = cmp.mapping.confirm({ select = false }),
+
+          -- Navigate menu
+          ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+
+          -- Jump through snippet fields with C-l / C-h
+          ["<C-l>"] = cmp.mapping(function()
+            if luasnip.jumpable(1) then luasnip.jump(1) end
+          end, { "i", "s" }),
+          ["<C-h>"] = cmp.mapping(function()
+            if luasnip.jumpable(-1) then luasnip.jump(-1) end
           end, { "i", "s" }),
 
-          -- Scroll docs in hover float
-          ["<C-d>"] = cmp.mapping.scroll_docs(4),
-          ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-
-          -- Manually trigger completion
           ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-e>"]     = cmp.mapping.abort(),
+          ["<C-d>"]     = cmp.mapping.scroll_docs(4),
+          ["<C-u>"]     = cmp.mapping.scroll_docs(-4),
         }),
       }
     end,

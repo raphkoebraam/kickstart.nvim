@@ -144,10 +144,10 @@ hi("Constant",          { fg = c.string })
 hi("String",            { fg = c.string })
 hi("Character",         { fg = c.string })
 hi("Number",            { fg = c.number })
-hi("Boolean",           { fg = c.keyword })
+hi("Boolean",           { fg = c.number })
 hi("Float",             { fg = c.number })
 
-hi("Identifier",        { fg = c.fg })
+hi("Identifier",        { fg = c.variable })
 hi("Function",          { fg = c.func })
 
 hi("Statement",         { fg = c.keyword })
@@ -164,10 +164,10 @@ hi("Define",            { fg = c.preproc })
 hi("Macro",             { fg = c.macro })
 hi("PreCondit",         { fg = c.preproc })
 
-hi("Type",              { fg = c.type,      bold = true })
+hi("Type",              { fg = c.type })
 hi("StorageClass",      { fg = c.keyword })
-hi("Structure",         { fg = c.decl_type, bold = true })
-hi("Typedef",           { fg = c.type,      bold = true })
+hi("Structure",         { fg = c.decl_type })
+hi("Typedef",           { fg = c.type })
 
 hi("Special",           { fg = c.preproc })
 hi("SpecialChar",       { fg = c.preproc })
@@ -197,10 +197,10 @@ hi("DiagnosticVirtualTextHint", { fg = c.hint,    bg = "#1b2d1f" })
 
 -- Treesitter ============================================================
 -- Identifiers
-hi("@variable",                 { fg = c.fg })
+hi("@variable",                 { fg = c.variable })
 hi("@variable.builtin",         { fg = c.variable })
 hi("@variable.parameter",       { fg = c.variable })
-hi("@variable.member",          { fg = c.property })
+hi("@variable.member",          { fg = c.variable })
 hi("@constant",                 { fg = c.enum_member })
 hi("@constant.builtin",         { fg = c.type_sys })
 hi("@constant.macro",           { fg = c.macro })
@@ -215,7 +215,7 @@ hi("@string.special.url",       { fg = c.url,       underline = true })
 hi("@character",                { fg = c.string })
 hi("@number",                   { fg = c.number })
 hi("@number.float",             { fg = c.number })
-hi("@boolean",                  { fg = c.keyword })
+hi("@boolean",                  { fg = c.number })
 
 -- Types
 hi("@type",                     { fg = c.type,      bold = true })
@@ -223,7 +223,7 @@ hi("@type.builtin",             { fg = c.type_sys,  bold = true })
 hi("@type.definition",          { fg = c.decl_type, bold = true })
 hi("@attribute",                { fg = c.type_sys,  bold = true })
 hi("@attribute.builtin",        { fg = c.type_sys,  bold = true })
-hi("@property",                 { fg = c.property })
+hi("@property",                 { fg = c.variable })
 
 -- Functions
 hi("@function",                 { fg = c.func })
@@ -286,8 +286,8 @@ hi("@lsp.type.enum",            { fg = c.type,     bold = true })
 hi("@lsp.type.interface",       { fg = c.type,     bold = true })
 hi("@lsp.type.typeAlias",       { fg = c.type,     bold = true })
 hi("@lsp.type.parameter",       { fg = c.variable })
-hi("@lsp.type.variable",        { fg = c.fg })
-hi("@lsp.type.property",        { fg = c.property })
+hi("@lsp.type.variable",        { fg = c.variable })
+hi("@lsp.type.property",        { fg = c.variable })
 hi("@lsp.type.function",        { fg = c.func })
 hi("@lsp.type.method",          { fg = c.func })
 hi("@lsp.type.macro",           { fg = c.macro })
@@ -311,16 +311,32 @@ hi("@lsp.typemod.variable.defaultLibrary", { fg = c.variable })
 
 -- Swift-specific LSP overrides (SourceKit-LSP) ==========================
 hi("@lsp.type.class.swift",                    { fg = c.attribute, bold = true })
-hi("@lsp.type.macro.swift",                    { fg = c.type_sys,  bold = true })
+hi("@lsp.type.macro.swift",                    { fg = c.preproc })          -- #if/#endif (gold)
 hi("@lsp.type.modifier.swift",                 { fg = c.type_sys,  bold = true })
-hi("@lsp.type.identifier.swift",               {})
+hi("@lsp.type.identifier.swift",               {})                          -- fallthrough to syntax
+hi("@lsp.type.function.swift",                 { fg = c.func })
+hi("@lsp.type.method.swift",                   { fg = c.func })
+hi("@lsp.type.property.swift",                 { fg = c.variable })
+hi("@lsp.type.keyword.swift",                  { fg = c.keyword })
+hi("@lsp.typemod.keyword.declaration.swift",   { fg = c.keyword })
+hi("@lsp.type.operator.swift",                 { fg = c.fg })
 
 -- Swift syntax layer overrides
-hi("swiftVarName",                             { fg = c.property })
-hi("swiftImportModule",                        { fg = c.fg, bold = true })
+hi("swiftVarName",                             { fg = c.variable })          -- bare variables = lavender
+hi("swiftImportModule",                        { fg = c.fg, bold = true })   -- import targets = white bold
+hi("swiftTypeDeclaration",                     { fg = c.fg })                -- -> : ? = white (punctuation)
+hi("swiftOperator",                            { fg = c.fg })                -- = + - etc. = white
+hi("swiftPreprocessor",                        { fg = c.preproc })
+hi("swiftPreproc",                             { fg = c.preproc })           -- swiftPreproc links to PreCondit
+hi("swiftConditionKeyword",                    { fg = c.preproc })
+hi("swiftPoundDirective",                      { fg = c.preproc })
+hi("swiftCompilerDirective",                   { fg = c.preproc })
+hi("swiftType",                                { fg = c.type })              -- type references = green
+hi("PreCondit",                                { fg = c.preproc })           -- #if/#endif fallback
+
 hi("@lsp.mod.defaultLibrary.swift",            { link = "@lsp" })
-hi("@lsp.typemod.class.defaultLibrary.swift",  { fg = c.type_sys,  bold = true })
-hi("@lsp.typemod.macro.defaultLibrary.swift",  { fg = c.type_sys,  bold = true })
+hi("@lsp.typemod.class.defaultLibrary.swift",  { fg = c.type_sys,  bold = true })  -- system types
+hi("@lsp.typemod.macro.defaultLibrary.swift",  { fg = c.type_sys,  bold = true })  -- @MainActor/@Observable (pri 127 wins over macro.swift pri 125)
 
 -- Git signs =============================================================
 hi("GitSignsAdd",       { fg = c.string })

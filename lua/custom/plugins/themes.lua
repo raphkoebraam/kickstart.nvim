@@ -84,12 +84,11 @@ return {
 
   -- ── Active theme (change this line to switch default) ─────────────────────
   {
-    "rebelot/kanagawa.nvim",       -- ← change to whichever you want as default
+    "railscasts",       -- ← change to whichever you want as default
     lazy = false,
     priority = 1000,
     config = function()
-      require("kanagawa").setup({ theme = "wave" })
-      vim.cmd("colorscheme kanagawa")
+      vim.cmd("colorscheme railscasts")
     end,
   },
 
@@ -103,7 +102,7 @@ return {
         function()
           local themes = {
             -- { label, colorscheme command }
-            { "railscasts",       "railscasts" },
+            -- { "railscasts",       "railscasts" },
             { "kanagawa (wave)",    "kanagawa-wave" },
             { "kanagawa (dragon)",  "kanagawa-dragon" },
             { "kanagawa (lotus)",   "kanagawa-lotus" },

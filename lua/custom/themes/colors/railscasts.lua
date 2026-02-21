@@ -341,7 +341,7 @@ hi("@lsp.typemod.enum.defaultLibrary.swift",   { fg = c.type_sys, bold = true })
 hi("@lsp.typemod.macro.defaultLibrary.swift",  { fg = c.attribute, bold = true }) -- @MainActor, @Observable
 
 -- Swift vim syntax fallback groups (only active when LSP = identifier → {})
-hi("swiftVarName",              { fg = c.variable })   -- bare vars = lavender
+hi("swiftVarName",              { fg = c.fg })          -- bare vars = white (matches Xcode)
 hi("swiftImportModule",         { fg = c.fg, bold = true })
 hi("swiftTypeDeclaration",      { fg = c.fg })         -- -> : ? punctuation
 hi("swiftOperator",             { fg = c.fg })         -- = + -

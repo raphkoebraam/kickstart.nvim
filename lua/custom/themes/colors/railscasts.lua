@@ -17,9 +17,9 @@ vim.o.background = "dark"
 local c = {
   -- Editor chrome
   bg            = "#1d1d1d",
-  bg_light      = "#252525",  -- slightly lighter bg for floats/popups
+  bg_light      = "#252525",
   cursorline    = "#2d2f36",
-  selection      = "#59647e",
+  selection     = "#59647e",
   cursor        = "#ffffff",
   invisibles    = "#7f7f7f",
   line_nr       = "#5a5a5a",
@@ -28,24 +28,24 @@ local c = {
   -- Foreground / plain text
   fg            = "#e6e1db",
 
-  -- Syntax
+  -- Syntax (from Railscasts2.xccolortheme)
   comment       = "#8e7042",
   keyword       = "#cc7832",  -- orange – keywords, control flow
-  string        = "#95b946",  -- green – strings, characters, numbers, regex
+  string        = "#95b946",  -- green – strings, characters, numbers
   number        = "#95b946",
-  preproc       = "#ffc56c",  -- light orange – preprocessor
-  attribute     = "#5688b2",  -- steel blue – attributes, functions
-  func          = "#5688b2",
-  decl_other    = "#41a1bf",  -- teal – other declarations (let, var, func keyword)
-  decl_type     = "#5cd7fe",  -- cyan – type declarations (class, struct, enum)
-  type          = "#569e67",  -- green – user types / classes
-  type_sys      = "#da4938",  -- red – system types / built-in types
-  variable      = "#b2b0eb",  -- lavender – variables
-  property      = "#89b5d4",  -- lighter steel blue – properties
-  enum_member   = "#c75a4a",  -- softer red – enum cases (distinct from system type red)
+  preproc       = "#ffc56c",  -- gold – preprocessor (#if, #endif)
+  func          = "#5688b2",  -- steel blue – function names/calls
+  decl_other    = "#41a1bf",  -- teal – func/let/var keyword
+  decl_type     = "#5cd7fe",  -- cyan – class/struct/enum keyword
+  type          = "#569e67",  -- green – user types
+  type_sys      = "#da4938",  -- red – system/built-in types
+  variable      = "#b2b0eb",  -- lavender – variables (Xcode identifier.variable)
+  property      = "#b2b0eb",  -- lavender – properties (same as variables in Xcode)
+  enum_member   = "#c75a4a",  -- softer red – enum cases
   macro         = "#f6f492",  -- yellow – macros, URLs
   url           = "#f6f492",
   mark          = "#91a1b1",  -- blue-grey – MARK/TODO
+  attribute     = "#da4938",  -- red bold – @MainActor, @Observable
 
   -- Diagnostics
   error         = "#f64949",
@@ -73,7 +73,9 @@ local function hi(group, opts)
   vim.api.nvim_set_hl(0, group, opts)
 end
 
--- Editor UI =============================================================
+-- ========================================================================
+-- Editor UI
+-- ========================================================================
 hi("Normal",            { fg = c.fg,          bg = c.bg })
 hi("NormalFloat",       { fg = c.fg,          bg = c.bg_light })
 hi("NormalNC",          { fg = c.fg,          bg = c.bg })
@@ -114,7 +116,7 @@ hi("NonText",           { fg = c.invisibles })
 hi("SpecialKey",        { fg = c.invisibles })
 hi("Whitespace",        { fg = c.invisibles })
 hi("EndOfBuffer",       { fg = c.line_nr })
-hi("Directory",         { fg = c.attribute })
+hi("Directory",         { fg = c.func })
 hi("Title",             { fg = c.preproc,     bold = true })
 hi("Question",          { fg = c.string })
 hi("MoreMsg",           { fg = c.string })
@@ -137,7 +139,9 @@ hi("SpellCap",          { sp = c.warning,     undercurl = true })
 hi("SpellRare",         { sp = c.info,        undercurl = true })
 hi("SpellLocal",        { sp = c.hint,        undercurl = true })
 
--- Standard syntax (Vim legacy groups) ====================================
+-- ========================================================================
+-- Vim legacy syntax groups
+-- ========================================================================
 hi("Comment",           { fg = c.comment,     italic = true })
 
 hi("Constant",          { fg = c.string })
@@ -147,7 +151,8 @@ hi("Number",            { fg = c.number })
 hi("Boolean",           { fg = c.number })
 hi("Float",             { fg = c.number })
 
-hi("Identifier",        { fg = c.variable })
+-- Identifier = fg (white). Like xcodedark, most identifiers are plain text.
+hi("Identifier",        { fg = c.fg })
 hi("Function",          { fg = c.func })
 
 hi("Statement",         { fg = c.keyword })
@@ -166,14 +171,14 @@ hi("PreCondit",         { fg = c.preproc })
 
 hi("Type",              { fg = c.type })
 hi("StorageClass",      { fg = c.keyword })
-hi("Structure",         { fg = c.decl_type })
+hi("Structure",         { fg = c.type })
 hi("Typedef",           { fg = c.type })
 
 hi("Special",           { fg = c.preproc })
 hi("SpecialChar",       { fg = c.preproc })
 hi("Tag",               { fg = c.keyword })
 hi("Delimiter",         { fg = c.fg })
-hi("SpecialComment",    { fg = c.mark,        italic = true })
+hi("SpecialComment",    { fg = c.mark,        bold = true })
 hi("Debug",             { fg = c.error })
 
 hi("Underlined",        { fg = c.url,         underline = true })
@@ -186,28 +191,30 @@ hi("DiagnosticError",           { fg = c.error })
 hi("DiagnosticWarn",            { fg = c.warning })
 hi("DiagnosticInfo",            { fg = c.info })
 hi("DiagnosticHint",            { fg = c.hint })
-hi("DiagnosticUnderlineError",  { sp = c.error,   undercurl = true })
-hi("DiagnosticUnderlineWarn",   { sp = c.warning, undercurl = true })
-hi("DiagnosticUnderlineInfo",   { sp = c.info,    undercurl = true })
-hi("DiagnosticUnderlineHint",   { sp = c.hint,    undercurl = true })
-hi("DiagnosticVirtualTextError",{ fg = c.error,   bg = "#2d1b1b" })
-hi("DiagnosticVirtualTextWarn", { fg = c.warning, bg = "#2d2617" })
-hi("DiagnosticVirtualTextInfo", { fg = c.info,    bg = "#1b2630" })
-hi("DiagnosticVirtualTextHint", { fg = c.hint,    bg = "#1b2d1f" })
+hi("DiagnosticUnderlineError",  { sp = c.error,    undercurl = true })
+hi("DiagnosticUnderlineWarn",   { sp = c.warning,  undercurl = true })
+hi("DiagnosticUnderlineInfo",   { sp = c.info,     undercurl = true })
+hi("DiagnosticUnderlineHint",   { sp = c.hint,     undercurl = true })
+hi("DiagnosticVirtualTextError",{ fg = c.error,    bg = "#2d1a1a" })
+hi("DiagnosticVirtualTextWarn", { fg = c.warning,  bg = "#2d2a1a" })
+hi("DiagnosticVirtualTextInfo", { fg = c.info,     bg = "#1a2a2d" })
+hi("DiagnosticVirtualTextHint", { fg = c.hint,     bg = "#1b2d1f" })
 
--- Treesitter ============================================================
--- Identifiers
-hi("@variable",                 { fg = c.variable })
-hi("@variable.builtin",         { fg = c.variable })
-hi("@variable.parameter",       { fg = c.variable })
-hi("@variable.member",          { fg = c.variable })
+-- ========================================================================
+-- Treesitter  (modeled after xcodedark/treesitter.lua)
+-- ========================================================================
+hi("@variable",                 { fg = c.fg })          -- plain text (like xcodedark)
+hi("@variable.builtin",         { fg = c.keyword })     -- self/this = keyword color
+hi("@variable.parameter",       { fg = c.variable })    -- parameters = lavender
+hi("@variable.member",          { fg = c.property })    -- obj.property = lavender
+
 hi("@constant",                 { fg = c.enum_member })
 hi("@constant.builtin",         { fg = c.type_sys })
 hi("@constant.macro",           { fg = c.macro })
-hi("@module",                   { fg = c.fg,       bold = true })
+hi("@module",                   { fg = c.type })
+hi("@module.builtin",           { fg = c.type })
 hi("@label",                    { fg = c.mark })
 
--- Literals
 hi("@string",                   { fg = c.string })
 hi("@string.escape",            { fg = c.preproc })
 hi("@string.special",           { fg = c.preproc })
@@ -217,15 +224,14 @@ hi("@number",                   { fg = c.number })
 hi("@number.float",             { fg = c.number })
 hi("@boolean",                  { fg = c.number })
 
--- Types
-hi("@type",                     { fg = c.type,      bold = true })
-hi("@type.builtin",             { fg = c.type_sys,  bold = true })
-hi("@type.definition",          { fg = c.decl_type, bold = true })
-hi("@attribute",                { fg = c.type_sys,  bold = true })
-hi("@attribute.builtin",        { fg = c.type_sys,  bold = true })
-hi("@property",                 { fg = c.variable })
+hi("@type",                     { fg = c.type })
+hi("@type.builtin",             { fg = c.type_sys })
+hi("@type.definition",          { fg = c.type })
+hi("@type.qualifier",           { fg = c.keyword })
+hi("@attribute",                { fg = c.attribute, bold = true })
+hi("@attribute.builtin",        { fg = c.attribute, bold = true })
+hi("@property",                 { fg = c.property })
 
--- Functions
 hi("@function",                 { fg = c.func })
 hi("@function.builtin",         { fg = c.func })
 hi("@function.call",            { fg = c.func })
@@ -234,7 +240,6 @@ hi("@function.method",          { fg = c.func })
 hi("@function.method.call",     { fg = c.func })
 hi("@constructor",              { fg = c.type })
 
--- Keywords
 hi("@keyword",                  { fg = c.keyword })
 hi("@keyword.coroutine",        { fg = c.keyword })
 hi("@keyword.function",         { fg = c.decl_other })
@@ -249,13 +254,11 @@ hi("@keyword.exception",        { fg = c.keyword })
 hi("@keyword.conditional",      { fg = c.keyword })
 hi("@keyword.directive",        { fg = c.preproc })
 
--- Punctuation & operators
 hi("@punctuation.bracket",      { fg = c.fg })
 hi("@punctuation.delimiter",    { fg = c.fg })
 hi("@punctuation.special",      { fg = c.preproc })
 hi("@operator",                 { fg = c.fg })
 
--- Comments
 hi("@comment",                  { fg = c.comment,  italic = true })
 hi("@comment.documentation",    { fg = c.comment,  italic = true })
 hi("@comment.todo",             { fg = c.macro,    bold = true })
@@ -263,7 +266,6 @@ hi("@comment.note",             { fg = c.info,     bold = true })
 hi("@comment.warning",          { fg = c.warning,  bold = true })
 hi("@comment.error",            { fg = c.error,    bold = true })
 
--- Markup
 hi("@markup.heading",           { fg = c.preproc,  bold = true })
 hi("@markup.strong",            { bold = true })
 hi("@markup.italic",            { italic = true })
@@ -274,76 +276,90 @@ hi("@markup.link.url",          { fg = c.url,      underline = true })
 hi("@markup.raw",               { fg = c.string })
 hi("@markup.list",              { fg = c.keyword })
 
--- Tags (HTML/XML)
 hi("@tag",                      { fg = c.keyword })
-hi("@tag.attribute",            { fg = c.attribute })
+hi("@tag.attribute",            { fg = c.func })
 hi("@tag.delimiter",            { fg = c.fg })
 
--- LSP semantic tokens ===================================================
-hi("@lsp.type.class",           { fg = c.type,     bold = true })
-hi("@lsp.type.struct",          { fg = c.type,     bold = true })
-hi("@lsp.type.enum",            { fg = c.type,     bold = true })
-hi("@lsp.type.interface",       { fg = c.type,     bold = true })
-hi("@lsp.type.typeAlias",       { fg = c.type,     bold = true })
+-- ========================================================================
+-- LSP semantic tokens  (modeled after xcodedark/lsp.lua)
+-- ========================================================================
+hi("@lsp.type.class",           { fg = c.type })
+hi("@lsp.type.struct",          { fg = c.type })
+hi("@lsp.type.enum",            { fg = c.type })
+hi("@lsp.type.interface",       { fg = c.type })
+hi("@lsp.type.typeAlias",       { fg = c.type })
 hi("@lsp.type.parameter",       { fg = c.variable })
-hi("@lsp.type.variable",        { fg = c.variable })
-hi("@lsp.type.property",        { fg = c.variable })
+hi("@lsp.type.variable",        { fg = c.fg })
+hi("@lsp.type.property",        { fg = c.property })
 hi("@lsp.type.function",        { fg = c.func })
 hi("@lsp.type.method",          { fg = c.func })
-hi("@lsp.type.macro",           { fg = c.macro })
+hi("@lsp.type.macro",           { fg = c.func })
 hi("@lsp.type.namespace",       { fg = c.type })
 hi("@lsp.type.enumMember",      { fg = c.enum_member })
 hi("@lsp.type.keyword",         { fg = c.keyword })
 hi("@lsp.type.comment",         { fg = c.comment,  italic = true })
+hi("@lsp.type.decorator",       { fg = c.attribute })
+
 hi("@lsp.mod.declaration",      {})
+hi("@lsp.mod.readonly",         {})
+hi("@lsp.mod.static",           {})
+hi("@lsp.mod.deprecated",       { strikethrough = true })
+hi("@lsp.mod.abstract",         { italic = true })
+hi("@lsp.mod.async",            { italic = true })
 hi("@lsp.mod.defaultLibrary",   { fg = c.type_sys })
--- Bold specifically for type-name declarations
-hi("@lsp.typemod.class.declaration",     { fg = c.type, bold = true })
-hi("@lsp.typemod.struct.declaration",    { fg = c.type, bold = true })
-hi("@lsp.typemod.enum.declaration",      { fg = c.type, bold = true })
-hi("@lsp.typemod.interface.declaration", { fg = c.type, bold = true })
-hi("@lsp.typemod.typeAlias.declaration", { fg = c.type, bold = true })
+
 hi("@lsp.typemod.class.defaultLibrary",    { fg = c.type_sys, bold = true })
 hi("@lsp.typemod.struct.defaultLibrary",   { fg = c.type_sys, bold = true })
 hi("@lsp.typemod.enum.defaultLibrary",     { fg = c.type_sys, bold = true })
 hi("@lsp.typemod.function.defaultLibrary", { fg = c.func })
 hi("@lsp.typemod.variable.defaultLibrary", { fg = c.variable })
 
--- Swift-specific LSP overrides (SourceKit-LSP) ==========================
-hi("@lsp.type.class.swift",                    { fg = c.attribute, bold = true })
-hi("@lsp.type.macro.swift",                    { fg = c.preproc })          -- #if/#endif (gold)
-hi("@lsp.type.modifier.swift",                 { fg = c.type_sys,  bold = true })
-hi("@lsp.type.identifier.swift",               {})                          -- fallthrough to syntax
+-- ========================================================================
+-- Swift / SourceKit-LSP overrides
+-- ========================================================================
+-- SourceKit-LSP tags nearly everything as @lsp.type.identifier.swift.
+-- Setting it to {} lets the vim syntax layer (swiftVarName, swiftType, etc.)
+-- control the final color. This is the same approach xcodedark uses.
+
+hi("@lsp.type.identifier.swift",               {})   -- CRITICAL: fallthrough to syntax
+hi("@lsp.type.keyword.swift",                  { fg = c.keyword })
+hi("@lsp.type.modifier.swift",                 { fg = c.keyword })
+hi("@lsp.type.operator.swift",                 { fg = c.fg })
+hi("@lsp.type.macro.swift",                    { fg = c.preproc })  -- #if/#endif = gold
+hi("@lsp.type.class.swift",                    { fg = c.type })
+hi("@lsp.type.struct.swift",                   { fg = c.type })
+hi("@lsp.type.enum.swift",                     { fg = c.type })
 hi("@lsp.type.function.swift",                 { fg = c.func })
 hi("@lsp.type.method.swift",                   { fg = c.func })
-hi("@lsp.type.property.swift",                 { fg = c.variable })
-hi("@lsp.type.keyword.swift",                  { fg = c.keyword })
-hi("@lsp.typemod.keyword.declaration.swift",   { fg = c.keyword })
-hi("@lsp.type.operator.swift",                 { fg = c.fg })
+hi("@lsp.type.property.swift",                 { fg = c.property })
 
--- Swift syntax layer overrides
-hi("swiftVarName",                             { fg = c.variable })          -- bare variables = lavender
-hi("swiftImportModule",                        { fg = c.fg, bold = true })   -- import targets = white bold
-hi("swiftTypeDeclaration",                     { fg = c.fg })                -- -> : ? = white (punctuation)
-hi("swiftOperator",                            { fg = c.fg })                -- = + - etc. = white
-hi("swiftPreprocessor",                        { fg = c.preproc })
-hi("swiftPreproc",                             { fg = c.preproc })           -- swiftPreproc links to PreCondit
-hi("swiftConditionKeyword",                    { fg = c.preproc })
-hi("swiftPoundDirective",                      { fg = c.preproc })
-hi("swiftCompilerDirective",                   { fg = c.preproc })
-hi("swiftType",                                { fg = c.type })              -- type references = green
-hi("PreCondit",                                { fg = c.preproc })           -- #if/#endif fallback
+-- defaultLibrary.swift overrides (priority 127 wins over base type at 125)
+hi("@lsp.mod.defaultLibrary.swift",            {})
+hi("@lsp.typemod.class.defaultLibrary.swift",  { fg = c.type_sys, bold = true })  -- Timer, Int
+hi("@lsp.typemod.struct.defaultLibrary.swift", { fg = c.type_sys, bold = true })  -- Date, Double
+hi("@lsp.typemod.enum.defaultLibrary.swift",   { fg = c.type_sys, bold = true })
+hi("@lsp.typemod.macro.defaultLibrary.swift",  { fg = c.attribute, bold = true }) -- @MainActor, @Observable
 
-hi("@lsp.mod.defaultLibrary.swift",            { link = "@lsp" })
-hi("@lsp.typemod.class.defaultLibrary.swift",  { fg = c.type_sys,  bold = true })  -- system types
-hi("@lsp.typemod.macro.defaultLibrary.swift",  { fg = c.type_sys,  bold = true })  -- @MainActor/@Observable (pri 127 wins over macro.swift pri 125)
+-- Swift vim syntax fallback groups (only active when LSP = identifier → {})
+hi("swiftVarName",              { fg = c.variable })   -- bare vars = lavender
+hi("swiftImportModule",         { fg = c.fg, bold = true })
+hi("swiftTypeDeclaration",      { fg = c.fg })         -- -> : ? punctuation
+hi("swiftOperator",             { fg = c.fg })         -- = + -
+hi("swiftType",                 { fg = c.type })       -- type refs = green
+hi("swiftPreprocessor",         { fg = c.preproc })
+hi("swiftPreproc",              { fg = c.preproc })
+hi("swiftConditionKeyword",     { fg = c.preproc })
 
--- Git signs =============================================================
+-- ========================================================================
+-- Plugin integrations
+-- ========================================================================
+
+-- Git signs
 hi("GitSignsAdd",       { fg = c.string })
 hi("GitSignsChange",    { fg = c.warning })
 hi("GitSignsDelete",    { fg = c.error })
 
--- Telescope =============================================================
+-- Telescope
 hi("TelescopeNormal",       { fg = c.fg,        bg = c.bg_light })
 hi("TelescopeBorder",       { fg = c.border,    bg = c.bg_light })
 hi("TelescopeTitle",        { fg = c.preproc,   bold = true })
@@ -351,7 +367,7 @@ hi("TelescopeMatching",     { fg = c.macro,     bold = true })
 hi("TelescopeSelection",    { bg = c.cursorline })
 hi("TelescopePromptPrefix", { fg = c.keyword })
 
--- nvim-cmp ==============================================================
+-- nvim-cmp
 hi("CmpItemAbbr",              { fg = c.fg })
 hi("CmpItemAbbrMatch",         { fg = c.macro,   bold = true })
 hi("CmpItemAbbrMatchFuzzy",    { fg = c.macro,   bold = true })
@@ -362,25 +378,25 @@ hi("CmpItemKindVariable",      { fg = c.variable })
 hi("CmpItemKindClass",         { fg = c.type })
 hi("CmpItemKindStruct",        { fg = c.type })
 hi("CmpItemKindKeyword",       { fg = c.keyword })
-hi("CmpItemKindProperty",      { fg = c.fg })
+hi("CmpItemKindProperty",      { fg = c.property })
 hi("CmpItemKindText",          { fg = c.fg })
 hi("CmpItemKindModule",        { fg = c.type })
 hi("CmpItemKindSnippet",       { fg = c.preproc })
 hi("CmpItemKindConstant",      { fg = c.type })
 hi("CmpItemKindEnum",          { fg = c.type })
-hi("CmpItemKindEnumMember",    { fg = c.type })
+hi("CmpItemKindEnumMember",    { fg = c.enum_member })
 hi("CmpItemKindInterface",     { fg = c.type })
 
--- Indent Blankline ======================================================
+-- Indent Blankline
 hi("IblIndent",         { fg = "#2a2a2a" })
 hi("IblScope",          { fg = c.border })
 
--- Lazy / Mason ==========================================================
+-- Lazy / Mason
 hi("LazyButton",        { fg = c.fg,        bg = c.bg_light })
 hi("LazyButtonActive",  { fg = c.bg,        bg = c.keyword })
 hi("LazyH1",            { fg = c.bg,        bg = c.keyword,  bold = true })
 
--- Notify ================================================================
+-- Notify
 hi("NotifyERRORBorder", { fg = c.error })
 hi("NotifyWARNBorder",  { fg = c.warning })
 hi("NotifyINFOBorder",  { fg = c.info })
@@ -388,11 +404,11 @@ hi("NotifyERRORTitle",  { fg = c.error })
 hi("NotifyWARNTitle",   { fg = c.warning })
 hi("NotifyINFOTitle",   { fg = c.info })
 
--- Mini.* (statusline, etc.) =============================================
+-- Mini.* (statusline, etc.)
 hi("MiniStatuslineFilename",    { fg = c.fg,      bg = c.bg_light })
 hi("MiniStatuslineDevinfo",     { fg = c.fg,      bg = c.cursorline })
-hi("MiniStatuslineModeNormal",  { fg = c.bg,      bg = c.attribute,  bold = true })
-hi("MiniStatuslineModeInsert",  { fg = c.bg,      bg = c.string,     bold = true })
-hi("MiniStatuslineModeVisual",  { fg = c.bg,      bg = c.macro,      bold = true })
-hi("MiniStatuslineModeReplace", { fg = c.bg,      bg = c.error,      bold = true })
-hi("MiniStatuslineModeCommand", { fg = c.bg,      bg = c.preproc,    bold = true })
+hi("MiniStatuslineModeNormal",  { fg = c.bg,      bg = c.func,      bold = true })
+hi("MiniStatuslineModeInsert",  { fg = c.bg,      bg = c.string,    bold = true })
+hi("MiniStatuslineModeVisual",  { fg = c.bg,      bg = c.macro,     bold = true })
+hi("MiniStatuslineModeReplace", { fg = c.bg,      bg = c.error,     bold = true })
+hi("MiniStatuslineModeCommand", { fg = c.bg,      bg = c.preproc,   bold = true })

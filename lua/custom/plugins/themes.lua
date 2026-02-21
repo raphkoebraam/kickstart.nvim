@@ -71,46 +71,6 @@ return {
           hi("@lsp.mod.defaultLibrary.swift",          { link = "@lsp" })
           hi("@lsp.typemod.class.defaultLibrary.swift",{ fg = "#5688B2" })
           hi("@lsp.typemod.macro.defaultLibrary.swift",{ fg = "#5688B2" })
-
-          -- hi("@attribute",           { fg = "#5688B2" })
-          -- hi("@attribute.builtin",   { fg = "#5688B2" })
-          -- hi("@lsp.type.decorator",  { fg = "#5688B2" })
-
-          -- hi("@keyword",             { fg = r.keyword })
-          -- hi("@keyword.function",    { fg = r.keyword })
-          -- hi("@keyword.return",      { fg = r.keyword })
-          -- hi("@keyword.conditional", { fg = r.keyword })
-          -- hi("@keyword.repeat",      { fg = r.keyword })
-          -- hi("@keyword.exception",   { fg = r.keyword })
-          -- hi("@string",              { fg = r.string })
-          -- hi("@number",              { fg = r.number })
-          -- hi("@boolean",             { fg = r.keyword })
-          -- hi("@comment",             { fg = r.comment, italic = true })
-          -- hi("@type",                { fg = r.type })
-          -- hi("@type.builtin",        { fg = r.type_sys })
-          -- hi("@type.definition",     { fg = r.decl_type })
-          -- hi("@function",            { fg = r.func })
-          -- hi("@function.method",     { fg = r.func })
-          -- hi("@function.call",       { fg = r.func })
-          -- hi("@variable",            { fg = r.variable })
-          -- hi("@variable.member",     { fg = r.variable })
-          -- hi("@variable.parameter",  { fg = r.variable })
-          -- hi("@constant",            { fg = r.type })
-          -- hi("@constant.builtin",    { fg = r.type_sys })
-          -- hi("@constant.macro",      { fg = r.macro })
-          -- hi("@attribute",           { fg = r.attribute })
-          -- hi("@preproc",             { fg = r.preprocessor })
-          -- hi("@module",              { fg = r.decl_other })
-
-          -- -- LSP semantic tokens
-          -- hi("@lsp.type.class",      { fg = r.type })
-          -- hi("@lsp.type.function",   { fg = r.func })
-          -- hi("@lsp.type.method",     { fg = r.func })
-          -- hi("@lsp.type.variable",   { fg = r.variable })
-          -- hi("@lsp.type.keyword",    { fg = r.keyword })
-          -- hi("@lsp.type.string",     { fg = r.string })
-          -- hi("@lsp.type.number",     { fg = r.number })
-          -- hi("@lsp.type.macro",      { fg = r.macro })
         end,
       })
     end,
@@ -143,6 +103,7 @@ return {
         function()
           local themes = {
             -- { label, colorscheme command }
+            { "railscasts",       "railscasts" },
             { "kanagawa (wave)",    "kanagawa-wave" },
             { "kanagawa (dragon)",  "kanagawa-dragon" },
             { "kanagawa (lotus)",   "kanagawa-lotus" },
@@ -156,7 +117,6 @@ return {
             { "catppuccin (mocha)","catppuccin-mocha" },
             { "gruvbox",           "gruvbox" },
             { "everforest",        "everforest" },
-            { "railscasts",       "railscasts" }
           }
 
           local pickers    = require("telescope.pickers")

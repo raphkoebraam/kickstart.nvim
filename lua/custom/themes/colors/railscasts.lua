@@ -41,6 +41,8 @@ local c = {
   type          = "#569e67",  -- green – user types / classes
   type_sys      = "#da4938",  -- red – system types / built-in types
   variable      = "#b2b0eb",  -- lavender – variables
+  property      = "#7ba2c4",  -- lighter steel blue – properties
+  enum_member   = "#6db37d",  -- lighter green – enum members (distinct from type green)
   macro         = "#f6f492",  -- yellow – macros, URLs
   url           = "#f6f492",
   mark          = "#91a1b1",  -- blue-grey – MARK/TODO
@@ -162,10 +164,10 @@ hi("Define",            { fg = c.preproc })
 hi("Macro",             { fg = c.macro })
 hi("PreCondit",         { fg = c.preproc })
 
-hi("Type",              { fg = c.type })
+hi("Type",              { fg = c.type,      bold = true })
 hi("StorageClass",      { fg = c.keyword })
-hi("Structure",         { fg = c.decl_type })
-hi("Typedef",           { fg = c.type })
+hi("Structure",         { fg = c.decl_type, bold = true })
+hi("Typedef",           { fg = c.type,      bold = true })
 
 hi("Special",           { fg = c.preproc })
 hi("SpecialChar",       { fg = c.preproc })
@@ -199,10 +201,10 @@ hi("@variable",                 { fg = c.fg })
 hi("@variable.builtin",         { fg = c.variable })
 hi("@variable.parameter",       { fg = c.variable })
 hi("@variable.member",          { fg = c.fg })
-hi("@constant",                 { fg = c.type })
+hi("@constant",                 { fg = c.enum_member })
 hi("@constant.builtin",         { fg = c.type_sys })
 hi("@constant.macro",           { fg = c.macro })
-hi("@module",                   { fg = c.type })
+hi("@module",                   { fg = c.fg,       bold = true })
 hi("@label",                    { fg = c.mark })
 
 -- Literals
@@ -216,12 +218,12 @@ hi("@number.float",             { fg = c.number })
 hi("@boolean",                  { fg = c.keyword })
 
 -- Types
-hi("@type",                     { fg = c.type })
-hi("@type.builtin",             { fg = c.type_sys })
-hi("@type.definition",          { fg = c.decl_type })
-hi("@attribute",                { fg = c.attribute })
-hi("@attribute.builtin",        { fg = c.attribute })
-hi("@property",                 { fg = c.fg })
+hi("@type",                     { fg = c.type,      bold = true })
+hi("@type.builtin",             { fg = c.type_sys,  bold = true })
+hi("@type.definition",          { fg = c.decl_type, bold = true })
+hi("@attribute",                { fg = c.type_sys,  bold = true })
+hi("@attribute.builtin",        { fg = c.type_sys,  bold = true })
+hi("@property",                 { fg = c.property })
 
 -- Functions
 hi("@function",                 { fg = c.func })
@@ -278,28 +280,36 @@ hi("@tag.attribute",            { fg = c.attribute })
 hi("@tag.delimiter",            { fg = c.fg })
 
 -- LSP semantic tokens ===================================================
-hi("@lsp.type.class",           { fg = c.type })
-hi("@lsp.type.struct",          { fg = c.type })
-hi("@lsp.type.enum",            { fg = c.type })
-hi("@lsp.type.interface",       { fg = c.type })
-hi("@lsp.type.typeAlias",       { fg = c.type })
+hi("@lsp.type.class",           { fg = c.type,     bold = true })
+hi("@lsp.type.struct",          { fg = c.type,     bold = true })
+hi("@lsp.type.enum",            { fg = c.type,     bold = true })
+hi("@lsp.type.interface",       { fg = c.type,     bold = true })
+hi("@lsp.type.typeAlias",       { fg = c.type,     bold = true })
 hi("@lsp.type.parameter",       { fg = c.variable })
 hi("@lsp.type.variable",        { fg = c.fg })
-hi("@lsp.type.property",        { fg = c.fg })
+hi("@lsp.type.property",        { fg = c.property })
 hi("@lsp.type.function",        { fg = c.func })
 hi("@lsp.type.method",          { fg = c.func })
 hi("@lsp.type.macro",           { fg = c.macro })
 hi("@lsp.type.namespace",       { fg = c.type })
-hi("@lsp.type.enumMember",      { fg = c.type })
+hi("@lsp.type.enumMember",      { fg = c.enum_member })
 hi("@lsp.type.keyword",         { fg = c.keyword })
 hi("@lsp.type.comment",         { fg = c.comment,  italic = true })
 hi("@lsp.mod.declaration",      { bold = true })
 hi("@lsp.mod.defaultLibrary",   { fg = c.type_sys })
-hi("@lsp.typemod.class.defaultLibrary",    { fg = c.type_sys })
-hi("@lsp.typemod.struct.defaultLibrary",   { fg = c.type_sys })
-hi("@lsp.typemod.enum.defaultLibrary",     { fg = c.type_sys })
+hi("@lsp.typemod.class.defaultLibrary",    { fg = c.type_sys, bold = true })
+hi("@lsp.typemod.struct.defaultLibrary",   { fg = c.type_sys, bold = true })
+hi("@lsp.typemod.enum.defaultLibrary",     { fg = c.type_sys, bold = true })
 hi("@lsp.typemod.function.defaultLibrary", { fg = c.func })
 hi("@lsp.typemod.variable.defaultLibrary", { fg = c.variable })
+
+-- Swift-specific LSP overrides (SourceKit-LSP) ==========================
+hi("@lsp.type.class.swift",                    { fg = c.attribute, bold = true })
+hi("@lsp.type.macro.swift",                    { fg = c.attribute, bold = true })
+hi("@lsp.type.modifier.swift",                 { fg = c.attribute })
+hi("@lsp.mod.defaultLibrary.swift",            { link = "@lsp" })
+hi("@lsp.typemod.class.defaultLibrary.swift",  { fg = c.attribute, bold = true })
+hi("@lsp.typemod.macro.defaultLibrary.swift",  { fg = c.attribute, bold = true })
 
 -- Git signs =============================================================
 hi("GitSignsAdd",       { fg = c.string })

@@ -927,3 +927,13 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+-- Swift / ObjC: spaces over tabs, 4 wide
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "swift", "objc", "objcpp" },
+  callback = function()
+    vim.bo.expandtab  = true
+    vim.bo.tabstop    = 4
+    vim.bo.shiftwidth = 4
+  end,
+})

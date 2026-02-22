@@ -9,36 +9,51 @@ return {
   },
 
   {
-    "EdenEast/nightfox.nvim",
+    "sainnhe/everforest",
     lazy = true,
-  },
-
-  {
-    "folke/tokyonight.nvim",
-    lazy = true,
-    opts = { style = "night" },
-  },
-
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    lazy = true,
-    opts = { flavour = "mocha" },
-  },
-
-  {
-    "ellisonleao/gruvbox.nvim",
-    lazy = true,
-    opts = { contrast = "hard" },
   },
 
   -- {
   --   "sainnhe/everforest",
   --   lazy = true,
+  --   config = function()
+  --     -- Pull Railscasts palette
+  --     local r = {
+  --       keyword      = "#CC7832",
+  --       string       = "#95B946",
+  --       number       = "#95B946",
+  --       comment      = "#8E7042",
+  --       type         = "#569E67",
+  --       type_sys     = "#DA4938",
+  --       decl_type    = "#5CD7FE",
+  --       decl_other   = "#41A1BF",
+  --       func         = "#5688B2",
+  --       variable     = "#B2B0EB",
+  --       macro        = "#F6F492",
+  --       preprocessor = "#FFC56C",
+  --       attribute    = "#5688B2",
+  --     }
+
+  --     vim.api.nvim_create_autocmd("ColorScheme", {
+  --       pattern = "everforest",
+  --       callback = function()
+  --         local hi = function(group, opts)
+  --           vim.api.nvim_set_hl(0, group, opts)
+  --         end
+
+  --         hi("@lsp.type.class.swift",                  { fg = "#5688B2" })
+  --         hi("@lsp.type.macro.swift",                  { fg = "#5688B2" })
+  --         hi("@lsp.type.modifier.swift",               { fg = "#5688B2" })
+  --         hi("@lsp.mod.defaultLibrary.swift",          { link = "@lsp" })
+  --         hi("@lsp.typemod.class.defaultLibrary.swift",{ fg = "#5688B2" })
+  --         hi("@lsp.typemod.macro.defaultLibrary.swift",{ fg = "#5688B2" })
+  --       end,
+  --     })
+  --   end,
   -- },
 
   {
-    "sainnhe/everforest",
+    "thesimonho/kanagawa-paper.nvim",
     lazy = true,
     config = function()
       -- Pull Railscasts palette
@@ -83,14 +98,14 @@ return {
   },
 
   -- ── Active theme (change this line to switch default) ─────────────────────
-  {
-    "railscasts",       -- ← change to whichever you want as default
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd("colorscheme railscasts")
-    end,
-  },
+  -- {
+  --   "railscasts",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd("colorscheme railscasts")
+  --   end,
+  -- },
 
   -- ── Theme switcher via <leader>ft ─────────────────────────────────────────
   {
@@ -102,20 +117,11 @@ return {
         function()
           local themes = {
             -- { label, colorscheme command }
-            -- { "railscasts",       "railscasts" },
+            { "kanagawa (paper)",   "kanagawa-paper" },
             { "kanagawa (wave)",    "kanagawa-wave" },
             { "kanagawa (dragon)",  "kanagawa-dragon" },
-            { "kanagawa (lotus)",   "kanagawa-lotus" },
-            { "nightfox",          "nightfox" },
-            { "carbonfox",         "carbonfox" },
-            { "nordfox",           "nordfox" },
-            { "terafox",           "terafox" },
-            { "duskfox",           "duskfox" },
-            { "tokyonight (night)","tokyonight-night" },
-            { "tokyonight (storm)","tokyonight-storm" },
-            { "catppuccin (mocha)","catppuccin-mocha" },
-            { "gruvbox",           "gruvbox" },
-            { "everforest",        "everforest" },
+            { "everforest",         "everforest" },
+            { "railscasts",        "railscasts" },
           }
 
           local pickers    = require("telescope.pickers")

@@ -345,7 +345,8 @@ hi("swiftVarName",              { fg = c.fg })          -- bare vars = white (ma
 hi("swiftImportModule",         { fg = c.fg, bold = true })
 hi("swiftTypeDeclaration",      { fg = c.fg })         -- -> : ? punctuation
 hi("swiftOperator",             { fg = c.fg })         -- = + -
-hi("swiftType",                 { fg = c.type })       -- type refs = green
+hi("swiftType",                 { fg = c.type, bold = true })  -- type refs = green
+hi("swiftTypePair",             { fg = c.type, bold = true })  -- type refs = green
 hi("swiftPreprocessor",         { fg = c.preproc })
 hi("swiftPreproc",              { fg = c.preproc })
 hi("swiftConditionKeyword",     { fg = c.preproc })

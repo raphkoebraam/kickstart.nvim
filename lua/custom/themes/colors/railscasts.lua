@@ -323,7 +323,7 @@ hi("@lsp.typemod.variable.defaultLibrary", { fg = c.variable })
 
 hi("@lsp.type.identifier.swift",               {})   -- CRITICAL: fallthrough to syntax
 hi("@lsp.type.keyword.swift",                  { fg = c.keyword })
-hi("@lsp.type.modifier.swift",                 { fg = c.keyword })
+hi("@lsp.type.modifier.swift",                 { fg = c.type_sys, bold = true })
 hi("@lsp.type.operator.swift",                 { fg = c.fg })
 hi("@lsp.type.macro.swift",                    { fg = c.preproc })  -- #if/#endif = gold
 hi("@lsp.type.class.swift",                    { fg = c.type })

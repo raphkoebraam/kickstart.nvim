@@ -93,7 +93,6 @@ return {
 
   {
     "railscasts",
-    lazy = true,
     dir = vim.fn.stdpath("config") .. "/lua/custom/themes",
   },
 
@@ -107,6 +106,33 @@ return {
   --   end,
   -- },
 
+  { -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+    'folke/tokyonight.nvim',
+    priority = 1000, -- Make sure to load this before all the other start plugins.
+    config = function()
+      ---@diagnostic disable-next-line: missing-fields
+      require('tokyonight').setup {
+        styles = {
+          comments = { italic = false }, -- Disable italics in comments
+        },
+      }
+
+      -- Load the colorscheme here.
+      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+      vim.cmd.colorscheme 'tokyonight-storm'
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "swift", "objc", "objcpp" },
+        callback = function()
+          vim.cmd("colorscheme railscasts")
+        end,
+      })
+
+      -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+      -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    end,
+  },
+
   -- ── Theme switcher via <leader>ft ─────────────────────────────────────────
   {
     "nvim-telescope/telescope.nvim",
@@ -117,11 +143,13 @@ return {
         function()
           local themes = {
             -- { label, colorscheme command }
+            { "railscasts",        "railscasts" },
+            { "tokyonight (moon)",  "tokyonight-moon" },
+            { "tokyonight (storm)", "tokyonight-storm" },
             { "kanagawa (paper)",   "kanagawa-paper" },
             { "kanagawa (wave)",    "kanagawa-wave" },
             { "kanagawa (dragon)",  "kanagawa-dragon" },
             { "everforest",         "everforest" },
-            { "railscasts",        "railscasts" },
           }
 
           local pickers    = require("telescope.pickers")

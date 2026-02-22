@@ -349,6 +349,7 @@ hi("swiftType",                 { fg = c.type })       -- type refs = green
 hi("swiftPreprocessor",         { fg = c.preproc })
 hi("swiftPreproc",              { fg = c.preproc })
 hi("swiftConditionKeyword",     { fg = c.preproc })
+hi("swiftLabel",                { fg = c.keyword })
 
 -- ========================================================================
 -- Plugin integrations

@@ -1,5 +1,4 @@
 return { -- All themes + live switcher via <leader>ft
-
   {
     "rebelot/kanagawa.nvim",
     lazy = true,
@@ -91,7 +90,7 @@ return { -- All themes + live switcher via <leader>ft
 
   {
     "railscasts",
-    dir = vim.fn.stdpath("config") .. "/lua/custom/themes",
+    dir = vim.fn.stdpath("config") .. "/lua/rko/lazy/themes",
   },
 
   -- ── Active theme (change this line to switch default) ─────────────────────

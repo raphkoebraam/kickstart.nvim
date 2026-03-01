@@ -225,5 +225,7 @@ return { -- Main LSP Configuration
         vim.keymap.set("n", "<leader>ca",  vim.lsp.buf.code_action,    opts)
       end,
     })
+
+    vim.o.winborder = "rounded"
   end,
 }

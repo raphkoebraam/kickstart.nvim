@@ -90,7 +90,7 @@ return { -- All themes + live switcher via <leader>ft
 
   {
     "railscasts",
-    dir = vim.fn.stdpath("config") .. "/lua/rko/lazy/themes",
+    dir = vim.fn.stdpath("config") .. "/lua/rko/lazy",
   },
 
   -- ── Active theme (change this line to switch default) ─────────────────────

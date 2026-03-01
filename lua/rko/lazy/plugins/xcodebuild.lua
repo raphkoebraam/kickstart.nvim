@@ -1,5 +1,5 @@
 return { -- Enhanced Swift support
-  "git@github.com:wojciech-kulik/xcodebuild.nvim.git",
+  "wojciech-kulik/xcodebuild.nvim",
   dependencies = {
     "nvim-telescope/telescope.nvim",
     "MunifTanjim/nui.nvim",

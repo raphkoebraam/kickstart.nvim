@@ -1,5 +1,5 @@
 return { -- Autoformat
-  "git@github.com:stevearc/conform.nvim.git",
+  "stevearc/conform.nvim",
   event = { "BufWritePre" },
   cmd = { "ConformInfo" },
   keys = {

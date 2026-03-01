@@ -7,7 +7,7 @@ return { -- Snippets
       luasnip.setup()
 
       require("luasnip.loaders.from_lua").load({
-        paths = vim.fn.stdpath("config") .. "/lua/custom/snippets",
+        paths = vim.fn.stdpath("config") .. "/lua/rko/lazy/snippets",
       })
     end,
   },

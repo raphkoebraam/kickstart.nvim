@@ -1,4 +1,4 @@
-return { -- Code completion
+return { -- Swift Auto Completion
   {
     "hrsh7th/nvim-cmp",
     version = false,

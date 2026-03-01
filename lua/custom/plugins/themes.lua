@@ -1,6 +1,4 @@
--- All themes + live switcher via <leader>ft
-
-return {
+return { -- All themes + live switcher via <leader>ft
 
   {
     "rebelot/kanagawa.nvim",
